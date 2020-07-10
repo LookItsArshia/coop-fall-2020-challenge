@@ -24,7 +24,8 @@ class EventSourcer():
         
 
     def undo(self):
-        
+        if len(self.history)==0:
+            return
         temp = self.history.pop()
         self.status = 1
         if temp[0]=='+':
@@ -37,7 +38,8 @@ class EventSourcer():
         
 
     def redo(self):
-
+        if len(self.redos)==0:
+            return
         temp = self.redos.pop(0)
         if temp[0]=='+':
             self.add(temp[1])
@@ -60,20 +62,3 @@ class EventSourcer():
 
 
 
-# value = EventSourcer()
-# value.add(3)
-# value.undo()
-# value.redo()
-# value.add(7)
-# value.add((3))
-# value.bulk_undo(2)
-# value.bulk_redo(2)
-# value.subtract(4)
-# value.undo()
-# value.add(3)
-# value.add(23)
-# value.bulk_redo(3)
-# value.bulk_undo(4)
-
-# # value.add(12)
-# print(value.value)
